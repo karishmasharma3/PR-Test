@@ -2,7 +2,7 @@ import toml
 
 
 def greetings(name):
-    return f"Hello {name}"
+    return f"Hello {name} How are you?"
 
 
 def read_toml():
