@@ -1,0 +1,41 @@
+[project]
+name = "cicd-invoke-sample"
+version = "0.1.10"
+description = "boilerplate/sample project for invoke lib"
+authors = [
+    {name = "Vikramark Bhadauria", email = "vbhadauria@salesforce.com"},
+]
+readme = "README.md"
+license = {text = "Salesforce.com"}
+# Runtime dependencies
+dependencies = [
+    "toml>=0.10.2"
+]
+requires-python = ">=3.9"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.black]
+line-length = 120
+
+[tool.epcicd.commonBuildFramework.pluginSettings]
+source = ["src"]
+CICD_invoke_unit_test_plugin.coverageThreshold = 85
+checkmarx.FAIL_ON = "medium"
+CICD_invoke_spectral_plugin.severityLevel = "error"
+CICD_invoke_spectral_plugin.failOnViolation = true
+CICD_invoke_formatting_plugin.failOnViolation = true
+
+# PDM syntax for non-runtime dependencies
+[tool.pdm.dev-dependencies]
+test = ["pytest>=7.1", "pytest-cov>=3.0",  "tox>=4.11.3", "tox-pdm>=0.7.0", "pytest-mock"]
+ep = ["cicd-invoke-central-python-lib"]
+
+[[tool.pdm.source]]
+url = "https://store.sfdcbt.net/nexus/repository/pypi-all/simple"
+verify_ssl = true
+name = "bt-nexus-pypi"
+
